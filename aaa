@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПЫШКИ ТУТ | Настоящие полоцкие пышки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #e55a2b;
+            --black: #1a1a1a;
+            --gray-dark: #4a4a4a;
+            --gray: #8a8a8a;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+            --border-radius: 25px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Хедер */
+        header {
+            background: var(--white);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        /* Логотип с изменением курсора и появлением надписи */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .logo-container:hover {
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .logo-container:hover .logo-img {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--black);
+            letter-spacing: -0.5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container:hover .logo-text {
+            opacity: 1;
+        }
+
+        header.scrolled .logo-img {
+            width: 42px;
+            height: 42px;
+        }
+
+        /* Кнопки навигации как в указанном варианте */
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            background: var(--gray-light);
+            padding: 6px;
+            border-radius: 50px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 50px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-btn.active {
+            color: var(--orange);
+        }
+
+        .nav-btn.active::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            background: 
+                linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('photo4.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        /* Основные кнопки */
+        .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: color 0.4s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--primary);
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+            border-radius: var(--border-radius);
+        }
+
+        .btn:hover::before {
+            height: 100%;
+        }
+
+        .btn:hover {
+            color: var(--white);
+        }
+
+        /* Секции */
+        section {
+            padding: 120px 2rem;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--black);
+        }
+
+        /* О нас */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .about-content {
+            padding-left: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .features {
+            list-style: none;
+            margin: 2.5rem 0;
+        }
+
+        .features li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+        }
+
+        .features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--gray);
+            border-left: 3px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2.5rem 0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Меню */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        /* Кнопки категорий */
+        .category-btn {
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .category-btn:hover:not(.active) {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .menu-category {
+            display: none;
+        }
+
+        .menu-category.active {
+            display: block;
+        }
+
+        .menu-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--gray-light);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .menu-item-info {
+            padding: 1.8rem;
+        }
+
+        .menu-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--black);
+        }
+
+        .price {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .menu-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(255, 107, 53, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-overlay {
+            opacity: 1;
+        }
+
+        .view-details {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            padding: 2.5rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-details {
+            background: var(--white);
+            padding: 3rem;
+            border: 1px solid var(--gray-light);
+        }
+
+        .contact-details h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--black);
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--gray-dark);
+        }
+
+        .map {
+            width: 100%;
+            height: 450px;
+            border: 1px solid var(--gray-light);
+        }
+
+        /* Карьера - кнопки на одной высоте */
+        .career-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gray-dark);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .career-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .career-item {
+            background: var(--white);
+            padding: 3rem;
+            border: 1px solid var(--gray-light);
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .career-item h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .career-item p {
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        /* Кнопки карьеры */
+        .career-btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: color 0.4s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: auto;
+        }
+
+        .career-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--primary);
+            transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+            border-radius: var(--border-radius);
+        }
+
+        .career-btn:hover::before {
+            height: 100%;
+        }
+
+        .career-btn:hover {
+            color: var(--white);
+        }
+
+        /* Мероприятия */
+        .events-content {
+            background: var(--white);
+            padding: 3rem;
+            border: 1px solid var(--gray-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gray-dark);
+        }
+
+        /* Футер */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 120px;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 968px) {
+            .about {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .about-content {
+                padding-left: 0;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 80px 1rem;
+            }
+            
+            .menu-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .career-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер -->
+    <header id="main-header">
+        <nav>
+            <a href="#main" class="logo-container" onclick="showSection('main')">
+                <img src="photo1.jpg" alt="Пышки Тут" class="logo-img" 
+                     onmouseover="this.src='photo2.jpg'" 
+                     onmouseout="this.src='photo1.jpg'">
+                <div class="logo-text">ПЫШКИ ТУТ</div>
+            </a>
+            <div class="nav-links">
+                <a href="#main" class="nav-btn active" onclick="showSection('main')">Главная</a>
+                <a href="#about" class="nav-btn" onclick="showSection('about')">О нас</a>
+                <a href="#menu" class="nav-btn" onclick="showSection('menu')">Меню</a>
+                <a href="#events" class="nav-btn" onclick="showSection('events')">Мероприятия</a>
+                <a href="#contacts" class="nav-btn" onclick="showSection('contacts')">Контакты</a>
+                <a href="#career" class="nav-btn" onclick="showSection('career')">Карьера</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Главная -->
+    <section id="main" class="active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>НАСТОЯЩИЕ ПОЛОЦКИЕ ПЫШКИ</h1>
+                <p>Выпекаем при вас. С любовью к традициям и городу</p>
+                <a href="#menu" class="btn" onclick="showSection('menu')">Смотреть меню</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about">
+        <div class="container">
+            <h2>О НАС</h2>
+            <div class="about">
+                <img src="photo3.jpg" alt="Наша пекарня" class="about-img">
+                <div class="about-content">
+                    <p class="about-text">Наша пекарня родилась из любви к настоящему вкусу детства и желания делиться этим теплом с каждым гостем.</p>
+                    
+                    <ul class="features">
+                        <li>Выпекаем при вас — вы видите, как рождаются ваши пышки</li>
+                        <li>Используем только натуральные ингредиенты</li>
+                        <li>Создаём место, где пахнет детством и уютом</li>
+                    </ul>
+                    
+                    <div class="quote">
+                        "Для нас важно, чтобы за ароматом свежей выпечки к вам возвращались самые тёплые воспоминания"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Меню -->
+    <section id="menu">
+        <div class="container">
+            <h2>МЕНЮ</h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" onclick="showCategory('ponchiki')">Пышки</button>
+                <button class="category-btn" onclick="showCategory('sets')">Сеты</button>
+                <button class="category-btn" onclick="showCategory('drinks')">Напитки</button>
+            </div>
+
+            <!-- Пончики -->
+            <div class="menu-category active" id="ponchiki">
+                <div class="menu-gallery">
+                    <div class="menu-item" onclick="openModal('classic')">
+                        <img src="photo5.jpg" alt="Классическая пышка" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Классическая пышка</h3>
+                            <div class="price">1.0 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('cinnamon')">
+                        <img src="photo6.jpg" alt="Пышка с клубникой" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Пышка с клубникой</h3>
+                            <div class="price">1.50 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('chocolate')">
+                        <img src="photo7.jpg" alt="Пышка с шоколадом" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Пышка с шоколадом</h3>
+                            <div class="price">1.50 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сеты -->
+            <div class="menu-category" id="sets">
+                <div class="menu-gallery">
+                    <div class="menu-item" onclick="openModal('set1')">
+                        <img src="photo8.jpg" alt="Сет 'Помогите'" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Сет "Сладкая парочка"</h3>
+                            <div class="price">5.00 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Напитки -->
+            <div class="menu-category" id="drinks">
+                <div class="menu-gallery">
+                    <div class="menu-item" onclick="openModal('coffee')">
+                        <img src="photo9.jpg" alt="Bubble tea "Гранат"" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Bubble tea "Гранат"</h3>
+                            <div class="price">10.00 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                    <div class="menu-item" onclick="openModal('tea')">
+                        <img src="photo10.jpg" alt="Bubble tea "Клубника"" class="menu-item-img">
+                        <div class="menu-item-info">
+                            <h3>Bubble tea "Клубника"</h3>
+                            <div class="price">11.00 руб.</div>
+                        </div>
+                        <div class="menu-item-overlay">
+                            <span class="view-details">Посмотреть детали</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальные окна -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <img id="modal-img" src="" alt="" class="modal-img">
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <div class="price" id="modal-price"></div>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мероприятия -->
+    <section id="events">
+        <div class="container">
+            <h2>МЕРОПРИЯТИЯ</h2>
+            <div class="events-content">
+                <p>Тут точно что-то будет...</p>
+                <br>
+                <p>Следите за анонсами в нашей Instagram!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Где мы -->
+    <section id="contacts">
+        <div class="container">
+            <h2>ГДЕ МЫ</h2>
+            <div class="contact-info">
+                <div class="contact-details">
+                    <h3>ПРИХОДИТЕ В ГОСТИ</h3>
+                    <p><strong>Адрес:</strong> Полоцк, Замковый проспект, 4</p>
+                    <p><strong>Телефон:</strong> +375 (XXX) XXX-XXX</p>
+                    <p><strong>Instagram:</strong> @pyshki.polotsk</p>
+                    <p><strong>Email:</strong> pyshki.polotsk@gmail.com</p>
+                    <br>
+                    <h4>Время работы:</h4>
+                    <p>10:00 - 20:00</p>
+                    <p>Без  обеда и выходных</p>
+                </div>
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карьера -->
+    <section id="career">
+        <div class="container">
+            <h2>КАРЬЕРА</h2>
+            <p class="career-text">Присоединяйтесь к нашей дружной команде! Мы ищем хорошего человека для работы на работе.</p>
+            <div class="career-items">
+                <div class="career-item">
+                    <h3>Пекарь-кондитер</h3>
+                    <p>Ищем опытного пекаря для работы в дружной атмосфере.</p>
+                    <p>Требования: опыт работы от 1 года, любовь к своему делу.</p>
+                    <a href="#" class="career-btn">Откликнуться</a>
+                </div>
+                <div class="career-item">
+                    <h3>Бариста-кассир</h3>
+                    <p>Работа с гостями, приготовление напитков, кассовое обслуживание.</p>
+                    <p>Обучение предоставляем.</p>
+                    <a href="#" class="career-btn">Откликнуться</a>
+                </div>
+                <div class="career-item">
+                    <h3>Организатор мероприятий</h3>
+                    <p>Планирование и проведение наших знаменитых ивентов.</p>
+                    <p>Творческий подход приветствуется!</p>
+                    <a href="#" class="career-btn">Откликнуться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>ПЫШКИ ТУТ - Настоящие полоцкие пышки с 2022 года</p>
+        <p>© 2025 Пышки Тут</p>
+    </footer>
+
+    <!-- Яндекс Карты -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_api_ключ&lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        // Данные для модальных окон
+        const menuItems = {
+            'classic': {
+                title: 'Классическая пышка',
+                price: '1.0 руб.',
+                image: 'photo5.jpg',
+                description: 'Нежная пышка с сахарной пудрой, приготовленная по традиционному рецепту. Идеальное сочетание воздушного теста и сладкой посыпки.'
+            },
+            'cinnamon': {
+                title: 'Пышка с клубникой',
+                price: '1.50 руб.',
+                image: 'photo6.jpg',
+                description: 'Ароматная пышка с клубникой, которая напомнит вам о домашнем уюте и теплых вечерах. Идеально с чаем или кофе.'
+            },
+            'chocolate': {
+                title: 'Пышка с шоколадом',
+                price: '1.50 руб.',
+                image: 'photo7.jpg',
+                description: 'Для настоящих сладкоежек! Нежная пышка с шоколадной глазурью и посыпкой. Настоящее удовольствие для любителей шоколада.'
+            },
+            'set1': {
+                title: 'Сет "Помогите"',
+                price: '5.00 руб.',
+                image: 'photo8.jpg',
+                description: '2 классические пышки + 2 пышки с корицей + 2 напитка на выбор. Идеально для чего-то!'
+            },
+            'coffee': {
+                title: 'Кофе',
+                price: '3.00 руб.',
+                image: 'photo9.jpg',
+                description: 'Представьте, что здесь что-то крутое.'
+            },
+            'tea': {
+                title: 'Чай',
+                price: '2.50 руб.',
+                image: 'photo10.jpg',
+                description: 'Мне уже лень что-то выдумывать.'
+            }
+        };
+
+        let mapInitialized = false;
+
+        function initMap() {
+            if (mapInitialized) return;
+            
+            var myMap = new ymaps.Map("map", {
+                center: [55.4858, 28.7687],
+                zoom: 17
+            });
+
+            var myPlacemark = new ymaps.Placemark([55.486371, 28.765956], {
+                hintContent: 'Пышки Тут',
+                balloonContent: '<strong>ПЫШКИ ТУТ</strong><br>Пышечная "Пышки Тут"<br>Замковый проспект, 4'
+            }, {
+                preset: 'islands#redDotIcon'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+            mapInitialized = true;
+        }
+
+        // Анимация хедера при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+            
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+                if (button.getAttribute('href') === '#' + sectionId) {
+                    button.classList.add('active');
+                }
+            });
+            
+            if (sectionId === 'contacts' && !mapInitialized) {
+                ymaps.ready(initMap);
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function showCategory(categoryId) {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const categories = document.querySelectorAll('.menu-category');
+            categories.forEach(category => {
+                category.classList.remove('active');
+            });
+            document.getElementById(categoryId).classList.add('active');
+        }
+
+        function openModal(itemId) {
+            const item = menuItems[itemId];
+            if (item) {
+                document.getElementById('modal-img').src = item.image;
+                document.getElementById('modal-title').textContent = item.title;
+                document.getElementById('modal-price').textContent = item.price;
+                document.getElementById('modal-description').textContent = item.description;
+                document.getElementById('modal').classList.add('active');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('main');
+        });
+    </script>
+</body>
+</html>
